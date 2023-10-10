@@ -16,7 +16,7 @@ function EditProfile({ navigation }) {
     const dispatch = useDispatch();
     const userData = useSelector((state) => state.user);
 
-    console.log(userData.user.birthdate
+    console.log(userData.user?.birthdate
         , "====>userdataeditscreen");
     const [selectedImage, setSelectedImage] = useState('')
 
@@ -24,9 +24,9 @@ function EditProfile({ navigation }) {
     const [isEditingNumber, setIsEditingNumber] = useState(false);
     const [isEditingBirthdate, setIsEditingBirthdate] = useState(false);
 
-    const [name, setname] = useState(userData.user.firstName);
-    const [number, setphonenumber] = useState(userData.user.number);
-    const [birthdate, setbirthdate] = useState(userData.user.birthdate);
+    const [name, setname] = useState(userData.user?.firstName);
+    const [number, setphonenumber] = useState(userData.user?.number);
+    const [birthdate, setbirthdate] = useState(userData.user?.birthdate);
 
     const toggleEditingName = () => setIsEditingName(!isEditingName);
     const toggleEditingNumber = () => setIsEditingNumber(!isEditingNumber);
@@ -111,7 +111,7 @@ function EditProfile({ navigation }) {
                                 </View>
                             ) : (
                                 <View style={styles.img}>
-                                    <Image resizeMode='center' style={styles.img} source={{ uri: userData.user.profileImage }} />
+                                    <Image resizeMode='center' style={styles.img} source={{ uri: userData.user?.profileImage }} />
                                 </View>
                             )}
 
@@ -171,7 +171,7 @@ function EditProfile({ navigation }) {
                             placeholderTextColor={'#000'}
                             style={styles.inp}
                             editable={isEditingNumber}
-                            value={userData.user.number} // Display the user's phone number from Redux
+                            value={userData.user?.number} // Display the user's phone number from Redux
                             onChangeText={(text) => setphonenumber(text)} // Handle changes if needed
                         />
                         {!isEditingNumber && (
@@ -192,7 +192,7 @@ function EditProfile({ navigation }) {
                             placeholderTextColor={'#000'}
                             style={styles.inp}
                             editable={isEditingBirthdate}
-                            value={userData.user.birthdate} // Display the user's date of birth from Redux
+                            value={userData.user?.birthdate} // Display the user's date of birth from Redux
                             onChangeText={(text) => setbirthdate(text)} // Handle changes if needed
                         />
                         {!isEditingBirthdate && (

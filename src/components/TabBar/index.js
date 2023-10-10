@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         // marginHorizontal: sizes.screenWidth * 0.10,
         // marginVertical: sizes.screenHeight * 0.39,
-        bottom:sizes.screenHeight* 0.05,
+        bottom:sizes.screenHeight* 0.11,
         borderRadius: 50,
         flexDirection: 'row',
         justifyContent: "space-around",
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
           width: sizes.screenWidth * 0.10,
-          height: sizes.screenHeight * 0.053,
+          height: sizes.screenHeight * 0.045,
           backgroundColor: "#88CFF1",
           borderRadius: 50,
           justifyContent: "center",

@@ -9,7 +9,9 @@ import DP from '../../Assets/photo.png';
 import DP4 from '../../Assets/DP4.jpg';
 import date1 from "../../Assets/date1.png"
 import AntDesign from 'react-native-vector-icons/AntDesign';
-function viewScreen({ navigation }) {
+function viewScreen({ navigation,route  }) {
+    const { imageUri } = route.params || {}; // Use object destructuring with a default empty object
+    console.log(imageUri,"===>imageuri");
     const [current, setcurrent] = useState(0)
     const [content, setcontent] = useState([
         {
@@ -78,12 +80,19 @@ function viewScreen({ navigation }) {
 
         <SafeAreaView style={{ flex: 1, backgroundColor: "#000" }}>
 
-            <Image source={content[current].content} style={{ width: sizes.screenWidth, height: sizes.screenHeight, resizeMode: "cover" }}
+<Image source={{ uri: imageUri }} style={{ width: sizes.screenWidth, height: sizes.screenHeight, resizeMode: "cover" }}
                 onLoadEnd={() => {
                     progress.setValue(0);
                     start();
                 }}
             />
+            
+            {/* <Image source={content[current].content} style={{ width: sizes.screenWidth, height: sizes.screenHeight, resizeMode: "cover" }}
+                onLoadEnd={() => {
+                    progress.setValue(0);
+                    start();
+                }}
+            /> */}
             
 
             <SafeAreaView style={{ width: sizes.screenWidth, position: 'absolute', top: 20, justifyContent: 'space-evenly', flexDirection: 'row', alignItems: 'center' }}>

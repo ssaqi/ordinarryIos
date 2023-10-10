@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
           ios: {
           
             width:sizes.screenWidth * 0.11,
-            height:sizes.screenHeight * 0.06,
+            height:sizes.screenHeight * 0.05,
             borderColor: "#88CFF1",
             borderWidth:2,
             borderRadius:50,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
           ios: {
           
             width:sizes.screenWidth * 0.11,
-            height:sizes.screenHeight * 0.06,
+            height:sizes.screenHeight * 0.05,
             borderColor: "#88CFF1",
             borderWidth:2,
             borderRadius:50,

@@ -117,12 +117,7 @@ const Componentthrd = () => {
                 </View>
             </View>
      
-            <TouchableOpacity
-            style={styles.buttoncontainer}
-                  onPress={()=>navigation.navigate("creataccount")}
-            >
-                    <Text style={styles.buttontext}>Get started</Text>
-            </TouchableOpacity>
+            
               
 
         </SafeAreaView>

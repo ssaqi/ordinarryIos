@@ -58,5 +58,6 @@ target 'ordinary' do
       :mac_catalyst_enabled => false
     )
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    pod 'react-native-audio-record', :path => '../node_modules/react-native-audio-record'
   end
 end

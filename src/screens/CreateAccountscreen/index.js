@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         ...Platform.select({
             ios: {
                 width:sizes.screenWidth*0.11,
-                height:sizes.screenHeight*0.06,
+                height:sizes.screenHeight*0.05,
                 backgroundColor: "#7BCFF6",
                 borderRadius: 50,
                 justifyContent:'center',

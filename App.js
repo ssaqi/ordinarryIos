@@ -8,6 +8,7 @@
 import React, { useEffect } from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -27,9 +28,9 @@ import { Navbar } from './src/config';
 
 
 function App() {
-  // useEffect(() => {
-  //   SplashScreen.hide();
-  // }, [])
+  useEffect(() => {
+    if(Platform.OS==="android")SplashScreen.hide();
+  }, [])
 
   return (
     <>

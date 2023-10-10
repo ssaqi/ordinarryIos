@@ -153,12 +153,12 @@ const styles = StyleSheet.create({
         ...Platform.select({
             ios: {
               
-                marginVertical: sizes.screenHeight * 0.03,
+                marginVertical: sizes.screenHeight * 0.01,
                 fontFamily: "poppins",
                 color: "#7BCFF6",
                 fontSize: fontSize.h4,
                 fontWeight: "700",
-                marginHorizontal:sizes.screenWidth * 0.19
+                marginHorizontal:sizes.screenWidth * 0.10
 
             },
           
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
                 top: sizes.screenHeight * 0.42,
                 left: sizes.screenWidth * 0.80,
                 width:sizes.screenWidth * 0.16,
-                height: sizes.screenHeight * 0.09,
+                height: sizes.screenHeight * 0.07,
                 backgroundColor: "#7BCFF6",
                 borderRadius: 50,
                 justifyContent: 'center',

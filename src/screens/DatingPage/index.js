@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from 'react'
-import { FlatList, View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, ImageBackground, SafeAreaView } from 'react-native'
+import { FlatList, View, Text, StyleSheet, ScrollView, 
+  Image, TouchableOpacity, ImageBackground, Alert,SafeAreaView,Platform } from 'react-native'
 import { sizes, fontSize } from '../../utilities'
 import DP from '../../Assets/photo.png';
 import DP1 from '../../Assets/stroy.jpg';
@@ -11,6 +12,8 @@ import Img from '../../Assets/stoiesome.png'
 import { AppHeader, Filter, TabBar } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+
 
 
 
@@ -99,20 +102,20 @@ const PostImage = ({ backgroundimage, image, name, des, intrest }) => {
 
     <ImageBackground source={backgroundimage} resizeMode='cover' style={styles.stories}>
 
-  <SafeAreaView>
+
       <TouchableOpacity style={styles.smbol}>
         <Text style={styles.txx}>{intrest}</Text>
       </TouchableOpacity>
       <View style={styles.dptxt}>
         <Text style={styles.dptt}>{des}</Text>
       </View>
-      <View style={styles.showDp}>
+      <SafeAreaView style={styles.showDp}>
 
         <View style={styles.profile1}>
 
           <Image
             source={image}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "100%"}}
 
           />
 
@@ -122,8 +125,7 @@ const PostImage = ({ backgroundimage, image, name, des, intrest }) => {
           <Text style={styles.dptt1}>{name}</Text>
         </View>
 
-      </View>
-      </SafeAreaView> 
+      </SafeAreaView>
 
     </ImageBackground>
 
@@ -172,33 +174,53 @@ console.log(userImage,"==>");
  
   
   const UploadStori = () => {
-     navigation.navigate("view")
-  }
-  return (
-    <TouchableOpacity style={styles.StoryDiv}
-      onPress={UploadStori}>
 
-      <View style={styles.profile}>
+    let option = {
+
+        storageoption: {
+            path: "images"
+        }
+    }
+
+    launchImageLibrary(option, async (response) => {
+        if (response.assets && response.assets.length > 0) {
+        const uri = response?.assets[0].uri;
+        // Navigate to the "ViewStory" screen and pass the image URI
+        navigation.navigate("view", { imageUri: uri });
+        }
+    })
+}
+  return (
+    <SafeAreaView style={styles.StoryDiv}>
+
+      <TouchableOpacity 
+      style={styles.profile}
+       onPress={()=>navigation.navigate("view")}  
+      >
 
         <Image
           source={image}
           style={{ width: "100%", height: "100%" }}
           resizeMode='center'
-
+          
         />
 
 
-      </View>
-
-      <Image
-        onProgress={UploadStori}
-        source={ion}
-        style={styles.icon}
-      />
-
+      </TouchableOpacity>
       <Text style={styles.text}>{name}</Text>
 
+
+    <TouchableOpacity
+    onPress={UploadStori}
+    style={styles.icon}
+    
+    >
+      <Image
+        source={ion}
+        />
     </TouchableOpacity>
+
+    </SafeAreaView>
 
   )
 }
@@ -221,12 +243,19 @@ function DatingPage({ navigation }) {
 
   return (
     <>
-      <SafeAreaView style={{ backgroundColor: "#fff", paddingBottom: sizes.screenHeight * 0.06 }} >
+      <View style={{ backgroundColor: "#fff", paddingBottom: sizes.screenHeight * 0.06 }} >
         <AppHeader openModal={openModal} />
 
-        <View style={styles.Story}>
+        <View style={styles.Story}
+    
+        >
+            
+          <View style={styles.mainStor}
+               onPress={()=>navigation.navigate("view")}
+          >
 
-          <View style={styles.mainStor}>
+
+
             <FlatList
               horizontal
               showsHorizontalScrollIndicator={false}
@@ -274,10 +303,10 @@ function DatingPage({ navigation }) {
 
 
 
+      </View>
         <View style={{ justifyContent: 'center', alignItems: 'center', }}>
           <TabBar />
         </View>
-      </SafeAreaView>
       <Filter isModalVisible={isModalVisible} closeModal={closeModal} />
 
     </>
@@ -321,19 +350,20 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     overflow: 'hidden',
     ...Platform.select({
-      ios: {        
-    width: sizes.screenWidth * 0.20,
-    height: sizes.screenHeight * 0.11,
-    // backgroundColor:"#fff",
-    marginVertical: sizes.screenHeight * 0.01,
-    marginHorizontal: sizes.screenWidth * 0.03,
-    borderColor: "#88CFF1",
-    borderWidth: 2,
-    borderRadius: 90,
-    overflow: 'hidden',
+      ios: {
+        width: sizes.screenWidth * 0.20,
+        height: sizes.screenHeight * 0.09,
+        // backgroundColor:"#fff",
+        marginVertical: sizes.screenHeight * 0.01,
+        marginHorizontal: sizes.screenWidth * 0.03,
+        borderColor: "#88CFF1",
+        borderWidth: 2,
+        borderRadius: 90,
+        overflow: 'hidden',
       },
     
     }),
+
   },
   text: {
     justifyContent: "center",
@@ -365,12 +395,11 @@ const styles = StyleSheet.create({
     bottom: sizes.screenHeight * 0.05,
     position: 'absolute',
     ...Platform.select({
-      ios: {        
-
+      ios: {
         flexDirection: "row",
-        left: sizes.screenWidth * 0.18,
-        bottom: sizes.screenHeight * 0.03,
-        position: 'absolute',
+    left: sizes.screenWidth * 0.17,
+    bottom: sizes.screenHeight * 0.03,
+    position: 'absolute',
       },
     
     }),
@@ -392,12 +421,22 @@ const styles = StyleSheet.create({
     height: sizes.screenHeight * 0.5,
     // backgroundColor: "white",
     marginVertical: sizes.screenHeight * 0.02,
-
     borderRadius: 10,
-
-
     paddingHorizontal: sizes.screenWidth * 0.03,
-    paddingVertical: sizes.screenHeight * 0.02
+    paddingVertical: sizes.screenHeight * 0.02,
+    ...Platform.select({
+      ios: {
+        width: sizes.screenWidth * 0.9,
+        height: sizes.screenHeight * 0.5,
+        // backgroundColor: "white",
+        marginVertical: sizes.screenHeight * 0.02,
+        borderRadius: 10,
+        paddingHorizontal: sizes.screenWidth * 0.03,
+        paddingVertical: sizes.screenHeight * 0.02,
+        overflow:"hidden"
+      },
+    
+    }),
   },
   smbol: {
 
@@ -408,11 +447,11 @@ const styles = StyleSheet.create({
     opacity: 0.6,
     ...Platform.select({
       ios: {
-          width: sizes.screenWidth * 0.2,
-    height: sizes.screenHeight * 0.05,
-    backgroundColor: "#CBCBCB",
-    borderRadius: sizes.screenWidth * 0.125,
-    opacity: 0.7,
+        width: sizes.screenWidth * 0.2,
+        height: sizes.screenHeight * 0.04,
+        backgroundColor: "#CBCBCB",
+        borderRadius: sizes.screenWidth * 0.125,
+        opacity: 0.7,
       },
     
     }),
@@ -424,14 +463,33 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     marginVertical: sizes.screenHeight * 0.009,
     fontFamily: "popin",
-    borderColor: "#fff"
+    borderColor: "#fff",
+    ...Platform.select({
+      ios: {
+        textAlign: "center",
+        color: "#fff",
+        fontSize: fontSize.medium,
+        fontWeight: "800",
+        marginVertical: sizes.screenHeight * 0.009,
+        fontFamily: "popin",
+        borderColor: "#fff",
+      },
+    
+    }),
   },
   storImg: {
     width: sizes.screenWidth * 0.9,
     height: sizes.screenHeight * 0.5,
     borderRadius: 20,
     //  opacity:0.2
-
+    ...Platform.select({
+      ios: {
+        width: sizes.screenWidth * 0.9,
+        height: sizes.screenHeight * 0.5,
+        borderRadius: 20,
+      },
+    
+    }),
 
   },
   dptxt: {
@@ -453,29 +511,30 @@ const styles = StyleSheet.create({
 
     width: sizes.screenWidth * 0.6,
     height: sizes.screenHeight * 0.10,
+
     // marginHorizontal: sizes.screenHeight * 0.05,
     // marginVertical: sizes.screenWidth * 0.35,
     flexDirection: "row",
     marginTop: sizes.screenHeight * 0.08,
     alignItems: 'center',
-     ...Platform.select({
-        ios: {
-            width: sizes.screenWidth * 0.6,
-            height: sizes.screenHeight * 0.10,
-            // marginHorizontal: sizes.screenHeight * 0.05,
-            // marginVertical: sizes.screenWidth * 0.35,
-            flexDirection: "row",
-            marginTop: sizes.screenHeight * 0.08,
-            alignItems: 'center',
-        },
-      
-      }),
+    ...Platform.select({
+      ios: {
+        width: sizes.screenWidth * 0.10,
+        height: sizes.screenHeight * 0.10,
+        // marginHorizontal: sizes.screenHeight * 0.05,
+        // marginVertical: sizes.screenWidth * 0.35,
+        flexDirection: "row",
+        marginTop: sizes.screenHeight * 0.08,
+        alignItems: 'center',
+      },
+    
+    }),
 
 
   },
   profile1: {
 
-    width: sizes.screenWidth * 0.13,
+    width: sizes.screenWidth * 0.12,
     height: sizes.screenHeight * 0.06,
     backgroundColor: "#fff",
     // marginVertical: sizes.screenHeight * 0.015,
@@ -486,17 +545,15 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     ...Platform.select({
       ios: {
-     
-
-          width: sizes.screenWidth * 0.13,
-          height: sizes.screenHeight * 0.07,
-          backgroundColor: "#fff",
-          // marginVertical: sizes.screenHeight * 0.015,
-          // marginHorizontal: sizes.screenWidth * 0.02,
-          borderColor: "#88CFF1",
-          borderWidth: 2,
-          borderRadius: 50,
-          overflow: 'hidden',
+        width: sizes.screenWidth * 0.12,
+        height: sizes.screenHeight * 0.055,
+        backgroundColor: "#fff",
+        // marginVertical: sizes.screenHeight * 0.015,
+        // marginHorizontal: sizes.screenWidth * 0.02,
+        borderColor: "#88CFF1",
+        borderWidth: 2,
+        borderRadius: 50,
+        overflow: 'hidden',
       },
     
     }),
@@ -519,7 +576,19 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     marginVertical: sizes.screenHeight * 0.03,
     marginHorizontal: sizes.screenWidth * 0.03,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    ...Platform.select({
+      ios: {
+        color: "#fff",
+        fontSize: fontSize.medium,
+        fontWeight: "900",
+        marginVertical: sizes.screenHeight * 0.03,
+        marginHorizontal: sizes.screenWidth * 0.01,
+        width: sizes.screenWidth * 0.4,
+        textTransform: "capitalize",
+      },
+    
+    }),
   },
   btnDiv: {
 
@@ -551,16 +620,15 @@ const styles = StyleSheet.create({
     fontFamily: "popin",
     ...Platform.select({
       ios: {
-          textAlign: "center",
-          color: "#88CFF1",
-          fontSize: fontSize.medium,
-          fontWeight: "700",
-          marginVertical: sizes.screenHeight * 0.012,
-          marginHorizontal: sizes.screenWidth * 0.08,
+        textAlign: "center",
+        color: "#88CFF1",
+        fontSize: fontSize.medium,
+        fontWeight: "700",
+        marginVertical: sizes.screenHeight * 0.009,
+        marginHorizontal: sizes.screenWidth * 0.06,
       },
     
     }),
-
   },
   btn2: {
 
@@ -580,19 +648,6 @@ const styles = StyleSheet.create({
     marginVertical: sizes.screenHeight * 0.009,
     marginHorizontal: sizes.screenWidth * 0.06,
     fontFamily: "popin",
-    ...Platform.select({
-      ios: {
-          textAlign: "center",
-          color: "#fff",
-          fontSize: fontSize.medium,
-          fontWeight: "700",
-          marginVertical: sizes.screenHeight * 0.012,
-          marginHorizontal: sizes.screenWidth * 0.06,
-          fontFamily: "popin",
-      },
-    
-    }),
-
 
   },
   bgbtn: {

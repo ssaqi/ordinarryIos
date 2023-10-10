@@ -85,7 +85,12 @@ const Introductionliderscreen = ({ navigation }) => {
             <Text style={styles.buttontext}>next</Text>
 
           </TouchableOpacity>
-        :""}
+        :<TouchableOpacity
+        style={styles.buttoncontainer}
+              onPress={()=>navigation.navigate("creataccount")}
+        >
+                <Text style={styles.buttontext}>Get started</Text>
+        </TouchableOpacity>}
 
         <View style={styles.wrapDot}>
           {slides?.map((item, index) => {
@@ -237,7 +242,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 50,
         left: sizes.screenWidth * 0.39,
-        marginVertical:sizes.screenHeight*0.04,
+        marginVertical:sizes.screenHeight*0.08,
       },
     
     }),

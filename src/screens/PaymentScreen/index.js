@@ -6,7 +6,7 @@ import { Arrowback } from '../../components';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 import ICON from '../../Assets/pay.png'
-function PaymentScreen() {
+function PaymentScreen({navigation}) {
   return (
     <ImageBackground source={background} style={styles.bgImg} resizeMode='cover' >
     
@@ -80,7 +80,10 @@ function PaymentScreen() {
 
 
 <View style={styles.buttoncontainer}>
-          <TouchableOpacity style={styles.button} >
+          <TouchableOpacity 
+           style={styles.button} 
+           onPress={()=>navigation.navigate("datingpage")}
+           >
             <Text style={styles.logintext}>Pay</Text>
           </TouchableOpacity>
         </View>

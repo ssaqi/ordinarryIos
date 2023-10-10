@@ -169,8 +169,8 @@ nextBtn:{
       ios: {
           top:sizes.screenHeight*0.55,
           left: sizes.screenWidth *0.76,
-           width:sizes.screenWidth * 0.17,
-           height: sizes.screenHeight * 0.09,
+           width:sizes.screenWidth * 0.15,
+           height: sizes.screenHeight * 0.07,
            backgroundColor: "#7BCFF6",
            borderRadius:50,
            justifyContent:'center',

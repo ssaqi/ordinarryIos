@@ -185,7 +185,7 @@ const ChatScreen = () => {
     //   }, []);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <View style={styles.headermessage}>
                     <View style={styles.viewicon}>
                 <TouchableOpacity onPress={()=>navigation.goBack()}>
@@ -209,7 +209,7 @@ const ChatScreen = () => {
                 </View></View>
 
             <View style={styles.activitiesview}>
-                <View><Text style={styles.activitestext}>Activities</Text></View>
+                <View ><Text style={styles.activitestext}>Activities</Text></View>
 
 
                 <FlatList
@@ -228,7 +228,7 @@ const ChatScreen = () => {
             </View>
 
         
-                <View>
+                <View style={styles.msgtxt}>
                     <Text style={styles.messagetext}>Messages</Text>
                 </View>
 
@@ -242,7 +242,7 @@ const ChatScreen = () => {
 
 
 
-        </View>
+        </SafeAreaView>
     )
 }
 
@@ -252,7 +252,16 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: sizes.screenWidth * 0.03,
         paddingVertical: sizes.screenHeight * 0.02,
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
+        ...Platform.select({
+            ios: {
+                flex: 1,
+        paddingHorizontal: sizes.screenWidth * 0.05,
+        paddingVertical: sizes.screenHeight * 0.02,
+        backgroundColor: "#fff",
+            },
+          
+          }),
     },
     headermessage: {
         flexDirection: 'row',
@@ -297,7 +306,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         flexDirection: 'row', alignItems: 'center',
         borderRadius: 10,
-        borderColor: "#E8E6EA"
+        borderColor: "#E8E6EA",
+       
+        
     },
     searchView1: {
         paddingHorizontal: sizes.screenWidth * 0.04,
@@ -308,7 +319,8 @@ const styles = StyleSheet.create({
         fontSize: fontSize.h4,
         fontWeight: '700',
         color: "#000",
-        textTransform: 'capitalize'
+        textTransform: 'capitalize',
+        marginVertical:sizes.screenHeight*0.03
     },
     messagetext: {
         fontSize: fontSize.h5,
@@ -316,8 +328,13 @@ const styles = StyleSheet.create({
         color: "#000",
         textTransform: 'capitalize'
     },
+    msgtxt:{
+      paddingHorizontal:sizes.screenWidth*0.04
+
+    },
     activitiesview: {
-        marginTop: sizes.screenHeight * 0.03
+        marginTop: sizes.screenHeight * 0.03,
+        paddingHorizontal:sizes.screenWidth*0.03,
     },
     imagecon: {
         width: sizes.screenWidth * 0.22,
@@ -340,7 +357,7 @@ const styles = StyleSheet.create({
         overflow:'hidden',
         ...Platform.select({
             ios: {
-                width: sizes.screenWidth * 0.18,
+                width: sizes.screenWidth * 0.22,
                 height: sizes.screenHeight * 0.10,
                 borderRadius: 75,
                 borderWidth: 2,
@@ -382,7 +399,7 @@ const styles = StyleSheet.create({
                 marginHorizontal: sizes.screenWidth * 0.03,
                 // overflow:'hidden',
                 borderColor: "#88CFF1",
-                width:  sizes.screenWidth * 0.18, // Adjust the size as needed
+                width:  sizes.screenWidth * 0.22, // Adjust the size as needed
                 height:sizes.screenHeight * 0.10, // Adjust the size as needed
                 borderRadius: sizes.screenWidth * 0.125, // This will make it circular
                 borderWidth: 2,
@@ -396,6 +413,7 @@ const styles = StyleSheet.create({
 
     storiescontainer: {
         flexDirection: 'row',
+        // paddingHorizontal:sizes.screenWidth*0.03,
         // marginVertical: sizes.screenHeight * 0.03,
         // borderWidth: 1,
 

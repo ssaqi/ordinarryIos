@@ -165,7 +165,7 @@ function TextScreen() {
   return (
 
     <SafeAreaView style={styles.container}>
-      <SafeAreaView style={styles.headermessage}>
+      <View style={styles.headermessage}>
         <View>
           <TouchableOpacity style={styles.viewicon}
             onPress={() => navigation.goBack()}
@@ -182,12 +182,13 @@ function TextScreen() {
             color={"#88CFF1"}
           />
         </TouchableOpacity>
-      </SafeAreaView>
-      <SafeAreaView style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: sizes.screenHeight * 0.06 }}>
+      </View>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: sizes.screenHeight * 0.06 }}>
         <View style={{ flexDirection: 'row' }}>
           <View style={styles.imageconmess}>
             <Image source={DP3}
-
+               style={{width:"100%",height:"100%"}}
+               resizeMode='center'
             />
 
           </View>
@@ -208,7 +209,7 @@ function TextScreen() {
             color="#000"
           />
         </TouchableOpacity>
-      </SafeAreaView>
+      </View>
 
 
 
@@ -217,7 +218,7 @@ function TextScreen() {
         data={messages}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
-          <SafeAreaView style={item.sender === 'user' ? styles.msgconright : styles.msgcon}>
+          <View style={item.sender === 'user' ? styles.msgconright : styles.msgcon}>
 
 
             <View style={styles.msg}>
@@ -240,7 +241,7 @@ function TextScreen() {
               )}
 
             </View>
-          </SafeAreaView>
+          </View>
         )}
       />
 
@@ -274,23 +275,29 @@ function TextScreen() {
           borderWidth: 1,
           padding: 15,
           borderRadius: 10,
-          borderColor: "#E8E6EA"
+          borderColor: "#E8E6EA",
+          height:sizes.screenHeight*0.07,
+          width:sizes.screenWidth*0.12
         }}>
           <FontAwesome
             name={isRecording ? 'stop-circle' : 'microphone'}
-            size={19}
+            size={21}
             color="#88CFF1"
+            
           />
         </TouchableOpacity> : <TouchableOpacity onPress={startRecording} style={{
           borderWidth: 1,
           padding: 15,
           borderRadius: 10,
-          borderColor: "#E8E6EA"
+          borderColor: "#E8E6EA",
+          height:sizes.screenHeight*0.07,
+          width:sizes.screenWidth*0.12
         }}>
           <FontAwesome
             name={isRecording ? 'stop-circle' : 'microphone'}
-            size={19}
+            size={21}
             color="#88CFF1"
+            style={{marginVertical:sizes.screenHeight*0.003}}
           />
         </TouchableOpacity>}
       </View>
@@ -383,8 +390,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     ...Platform.select({
       ios: {
-        width: sizes.screenWidth * 0.16,
-        height: sizes.screenHeight * 0.09,
+        width: sizes.screenWidth * 0.21,
+        height: sizes.screenHeight * 0.10,
         borderRadius: 75,
         borderWidth: 2,
         justifyContent: 'center',

@@ -140,7 +140,7 @@ const SwipPAge = ({navigation}) => {
                         <View style={styles.likedislikeContainer}>
                             <TouchableOpacity onPress={removeCard} style={styles.iconview}><View style={styles.iconstyle}><Entypo name={"cross"} size={40} color={"black"} /></View></TouchableOpacity>
                             <View style={styles.iconview}><View style={styles.iconstyleb}><Entypo name={"star"} size={30} color={"white"} /></View></View>
-                            <TouchableOpacity  onPress={navigateToDetailPage} style={styles.iconview}><View style={styles.iconstyleb}><Entypo name={"heart"} size={25} color={"white"} /></View></TouchableOpacity>
+                            <TouchableOpacity  onPress={navigateToDetailPage} style={styles.iconview}><View style={styles.iconstyleb}><Entypo name={"heart"} size={26} color={"white"} /></View></TouchableOpacity>
                         </View>
 
                     </View>
@@ -293,8 +293,8 @@ const styles = StyleSheet.create({
                 borderRadius: 40,
                 justifyContent: 'center',
                 alignItems: 'center',
-                width: sizes.screenWidth * 0.12,
-                height: sizes.screenHeight * 0.063,
+                width: sizes.screenWidth * 0.13,
+                height: sizes.screenHeight * 0.059,
                 shadowColor: "#000000",
                 shadowOffset: {
                     width: 0,
@@ -324,8 +324,8 @@ const styles = StyleSheet.create({
            
                 borderRadius: 40,
                 backgroundColor: "#88CFF1",
-                width: sizes.screenWidth * 0.12,
-                height: sizes.screenHeight * 0.063,
+                width: sizes.screenWidth * 0.13,
+                height: sizes.screenHeight * 0.059,
                 justifyContent: 'center',
                 alignItems: 'center',
             },
@@ -340,7 +340,7 @@ const styles = StyleSheet.create({
         // marginTop: sizes.screenHeight * 0.01,
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical:sizes.screenHeight * 0.04
+        marginVertical:sizes.screenHeight * 0.09  
     }
 
 })
